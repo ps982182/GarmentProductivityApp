@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garment Productivity Predictor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🧵 Garment Worker Productivity Prediction</h2>
+    <form method="POST" action="/pred" class="card p-4 shadow">
+        {% set instructions = {
+            'quarter': 'Enter a number between 1 and 4',
+            'department': 'Enter 0 for Finishing or 1 for Sewing',
+            'day': 'Enter a number from 1 (Monday) to 7 (Sunday)',
+            'team': 'Enter a number between 1 and 15',
+            'targeted_productivity': 'Enter a value between 0.0 and 1.0',
+            'smv': 'Enter a float (Standard Minute Value)',
+            'over_time': 'Enter time in minutes (0 or positive)',
+            'incentive': 'Enter amount given (0 or positive)',
+            'idle_time': 'Enter time in minutes (can be 0)',
+            'idle_men': 'Enter number of idle workers',
+            'no_of_style_change': 'Enter number of style changes (0 or more)',
+            'no_of_workers': 'Enter number of workers involved',
+            'month': 'Enter a number between 1 and 12'
+        } %}
+        {% for field, hint in instructions.items() %}
+        <div class="mb-3">
+            <label class="form-label">{{ field.replace('_', ' ').title() }}</label>
+            <input type="text" class="form-control" name="{{ field }}" placeholder="{{ hint }}" required>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+</div>
+</body>
+</html>
